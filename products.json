@@ -1,0 +1,12 @@
+[
+  {
+    "name": "ساعة ذكية",
+    "price": "199",
+    "image": "images/product1.jpg"
+  },
+  {
+    "name": "سماعات بلوتوث",
+    "price": "149",
+    "image": "images/product2.jpg"
+  }
+]
