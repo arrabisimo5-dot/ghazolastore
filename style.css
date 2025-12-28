@@ -12,22 +12,22 @@ header {
   text-align: center;
 }
 
-.add-product {
+.login, .add-product {
   background: white;
-  padding: 20px;
   margin: 20px;
+  padding: 20px;
   border-radius: 10px;
   text-align: center;
 }
 
-.add-product input {
+input {
   display: block;
   width: 90%;
   margin: 10px auto;
   padding: 10px;
 }
 
-.add-product button {
+button {
   background: #ff6600;
   color: white;
   border: none;
@@ -38,7 +38,7 @@ header {
 
 .products {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
   gap: 20px;
   padding: 20px;
 }
