@@ -9,57 +9,86 @@
 
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header>
-    <h1>GhazolaStore</h1>
-    <p>مرحبا بكم في متجر Ghazola</p>
-  </header>
+<header>
+  <h1>GhazolaStore</h1>
+  <p>منتوجات فاخرة • جودة • ثقة</p>
+</header>
 
-  <!-- ===== PRODUCTS ===== -->
-  <main>
-    <h2 style="text-align:center; margin-top:30px;">🛍️ المنتوجات</h2>
-    <div class="products" id="products"></div>
-  </main>
+<!-- SEARCH -->
+<div class="search-box">
+  <input type="text" id="searchInput" placeholder="🔍 قلب على منتوج..." onkeyup="searchProducts()">
+</div>
 
-  <!-- ===== FOOTER ===== -->
-  <footer style="text-align:center; padding:20px; opacity:0.7;">
-    © 2025 GhazolaStore
-  </footer>
+<!-- FILTERS -->
+<nav class="filters">
+  <button onclick="filterProducts('all')">الكل</button>
+  <button onclick="filterProducts('new')">جديد</button>
+  <button onclick="filterProducts('hot')">مميز</button>
+</nav>
 
-  <!-- ===== SCRIPT ===== -->
-  <script>
-    fetch("products.json")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("مشكل في تحميل المنتجات");
-        }
-        return response.json();
-      })
-      .then(products => {
-        const container = document.getElementById("products");
+<!-- PRODUCTS -->
+<section class="products" id="products">
 
-        products.forEach(product => {
-          const div = document.createElement("div");
-          div.className = "product";
+  <!-- PRODUCT -->
+  <div class="product new">
+    <span class="badge">NEW</span>
+    <img src="IMG_7707.jpeg">
+    <div class="product-info">
+      <h3>ساعة فاخرة</h3>
+      <p class="description">
+        ساعة أنيقة بجودة عالية، مناسبة لكل الأوقات.
+      </p>
+      <div class="price">299 DH</div>
+      <a class="buy-btn"
+         href="https://wa.me/212600000000?text=بغيت ساعة فاخرة"
+         target="_blank">
+         طلب عبر واتساب
+      </a>
+    </div>
+  </div>
 
-          div.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p class="price">${product.price} درهم</p>
-            <a class="btn" href="https://wa.me/212600000000" target="_blank">
-              اطلب عبر واتساب
-            </a>
-          `;
+  <!-- PRODUCT -->
+  <div class="product hot">
+    <span class="badge">HOT</span>
+    <img src="IMG_7707.jpeg">
+    <div class="product-info">
+      <h3>نظارات شمسية</h3>
+      <p class="description">
+        نظارات عصرية بحماية UV وتصميم راقي.
+      </p>
+      <div class="price">149 DH</div>
+      <a class="buy-btn"
+         href="https://wa.me/212600000000?text=بغيت نظارات شمسية"
+         target="_blank">
+         طلب عبر واتساب
+      </a>
+    </div>
+  </div>
 
-          container.appendChild(div);
-        });
-      })
-      .catch(error => {
-        document.getElementById("products").innerHTML =
-          "<p style='text-align:center;color:red;'>تعذر تحميل المنتجات</p>";
-        console.error(error);
-      });
-  </script>
+</section>
+
+<footer>
+  © 2025 GhazolaStore — جميع الحقوق محفوظة
+</footer>
+
+<script>
+function filterProducts(type) {
+  document.querySelectorAll('.product').forEach(p => {
+    p.style.display =
+      type === 'all' || p.classList.contains(type)
+        ? 'block'
+        : 'none';
+  });
+}
+
+function searchProducts() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+  document.querySelectorAll(".product").forEach(p => {
+    const name = p.querySelector("h3").innerText.toLowerCase();
+    p.style.display = name.includes(value) ? "block" : "none";
+  });
+}
+</script>
 
 </body>
 </html>
