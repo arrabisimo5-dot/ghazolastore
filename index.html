@@ -1,20 +1,69 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <title>GhazolaStore</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>GhazolaStore</title>
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<h1>مرحبا بكم في GhazolaStore</h1>
-<p>متجر إلكتروني بسيط</p>
+<header>
+  <h1>GhazolaStore</h1>
+  <p>متجرك الإلكتروني</p>
+</header>
 
-<div class="product">
-  <h3>منتج 1</h3>
-  <p>وصف المنتج</p>
-  <button>شراء</button>
-</div>
+<section class="add-product">
+  <h2>➕ إضافة منتوج جديد</h2>
+
+  <input type="file" id="imageInput" accept="image/*">
+  <input type="text" id="nameInput" placeholder="اسم المنتوج">
+  <input type="number" id="priceInput" placeholder="الثمن بالدرهم">
+
+  <button onclick="addProduct()">أضف المنتوج</button>
+</section>
+
+<hr>
+
+<section>
+  <h2 style="text-align:center;">🛍️ المنتوجات</h2>
+  <div class="products" id="products"></div>
+</section>
+
+<script>
+function addProduct() {
+  const image = document.getElementById("imageInput").files[0];
+  const name = document.getElementById("nameInput").value;
+  const price = document.getElementById("priceInput").value;
+
+  if (!image || !name || !price) {
+    alert("عمر جميع الخانات");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const product = document.createElement("div");
+    product.className = "product";
+
+    product.innerHTML = `
+      <img src="${e.target.result}">
+      <h3>${name}</h3>
+      <p class="price">${price} درهم</p>
+      <a href="https://wa.me/212641264611" class="btn">اطلب الآن</a>
+    `;
+
+    document.getElementById("products").appendChild(product);
+  };
+
+  reader.readAsDataURL(image);
+
+  // تفريغ الخانات
+  document.getElementById("imageInput").value = "";
+  document.getElementById("nameInput").value = "";
+  document.getElementById("priceInput").value = "";
+}
+</script>
 
 </body>
 </html>
